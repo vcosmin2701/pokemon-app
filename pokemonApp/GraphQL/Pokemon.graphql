@@ -1,0 +1,7 @@
+query PokemonGraphQLCall {
+  pokemon_v2_pokemon {
+    id
+    name
+    height
+  }
+}

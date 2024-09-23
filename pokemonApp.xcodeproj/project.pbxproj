@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,9 +14,8 @@
 		87A403D42CA15808000F6BEE /* pokemonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A403D32CA15808000F6BEE /* pokemonAppUITests.swift */; };
 		87A403D62CA15808000F6BEE /* pokemonAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A403D52CA15808000F6BEE /* pokemonAppUITestsLaunchTests.swift */; };
 		87A403E42CA15B6F000F6BEE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 87A403E32CA15B6F000F6BEE /* Apollo */; };
-		87A403EE2CA18405000F6BEE /* Query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 87A403EC2CA18405000F6BEE /* Query.graphql */; };
-		87A403EF2CA18405000F6BEE /* SchemaAPI.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A403ED2CA18405000F6BEE /* SchemaAPI.graphql.swift */; };
 		87A403F12CA1856B000F6BEE /* pokemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A403F02CA1856B000F6BEE /* pokemonApp.swift */; };
+		C390F59B2CA1F96B0099B0CD /* PokeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = C390F59A2CA1F96B0099B0CD /* PokeAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +45,19 @@
 		87A403CF2CA15808000F6BEE /* pokemonAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokemonAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A403D32CA15808000F6BEE /* pokemonAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonAppUITests.swift; sourceTree = "<group>"; };
 		87A403D52CA15808000F6BEE /* pokemonAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		87A403EC2CA18405000F6BEE /* Query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Query.graphql; sourceTree = "<group>"; };
-		87A403ED2CA18405000F6BEE /* SchemaAPI.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaAPI.graphql.swift; sourceTree = "<group>"; };
 		87A403F02CA1856B000F6BEE /* pokemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C390F5942CA1F7070099B0CD /* GraphQL */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = GraphQL; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		87A403B22CA15806000F6BEE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C390F59B2CA1F96B0099B0CD /* PokeAPI in Frameworks */,
 				87A403E42CA15B6F000F6BEE /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,7 +102,7 @@
 		87A403B72CA15806000F6BEE /* pokemonApp */ = {
 			isa = PBXGroup;
 			children = (
-				87A403E82CA178E4000F6BEE /* Network */,
+				C390F5942CA1F7070099B0CD /* GraphQL */,
 				87A403BA2CA15806000F6BEE /* ContentView.swift */,
 				87A403BC2CA15808000F6BEE /* Assets.xcassets */,
 				87A403BE2CA15808000F6BEE /* Preview Content */,
@@ -134,15 +136,6 @@
 			path = pokemonAppUITests;
 			sourceTree = "<group>";
 		};
-		87A403E82CA178E4000F6BEE /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				87A403EC2CA18405000F6BEE /* Query.graphql */,
-				87A403ED2CA18405000F6BEE /* SchemaAPI.graphql.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,9 +151,13 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				C390F5942CA1F7070099B0CD /* GraphQL */,
+			);
 			name = pokemonApp;
 			packageProductDependencies = (
 				87A403E32CA15B6F000F6BEE /* Apollo */,
+				C390F59A2CA1F96B0099B0CD /* PokeAPI */,
 			);
 			productName = pokemonApp;
 			productReference = 87A403B52CA15806000F6BEE /* pokemonApp.app */;
@@ -236,6 +233,7 @@
 			mainGroup = 87A403AC2CA15806000F6BEE;
 			packageReferences = (
 				87A403E22CA15B6F000F6BEE /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				C390F5992CA1F96B0099B0CD /* XCLocalSwiftPackageReference "pokeAPI" */,
 			);
 			productRefGroup = 87A403B62CA15806000F6BEE /* Products */;
 			projectDirPath = "";
@@ -254,7 +252,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				87A403C02CA15808000F6BEE /* Preview Assets.xcassets in Resources */,
-				87A403EE2CA18405000F6BEE /* Query.graphql in Resources */,
 				87A403BD2CA15808000F6BEE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +279,6 @@
 			files = (
 				87A403BB2CA15806000F6BEE /* ContentView.swift in Sources */,
 				87A403F12CA1856B000F6BEE /* pokemonApp.swift in Sources */,
-				87A403EF2CA18405000F6BEE /* SchemaAPI.graphql.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +598,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		C390F5992CA1F96B0099B0CD /* XCLocalSwiftPackageReference "pokeAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = pokeAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		87A403E22CA15B6F000F6BEE /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -618,6 +621,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 87A403E22CA15B6F000F6BEE /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		C390F59A2CA1F96B0099B0CD /* PokeAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PokeAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
