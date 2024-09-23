@@ -29,8 +29,8 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            fetchPokemon()
-        }
+            fetchPokemon()	
+        }	
     }
     
     private func fetchPokemon() {
