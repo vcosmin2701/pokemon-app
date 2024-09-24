@@ -18,14 +18,21 @@ struct ContentView: View {
     @State private var pokemonNames: [String] = []
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            
-            List(pokemonNames, id: \.self) { name in
-                Text(name)
+        NavigationStack {
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                
+                List(pokemonNames, id: \.self) { name in
+                    NavigationLink(name, value: name)
+                }
+                .navigationDestination(for: String.self) { pokemonName in
+                    PokemonDetails(name: pokemonName, height: 232)
+                }
             }
+            .navigationTitle("Home")
+            
         }
         .padding()
         .onAppear {
@@ -45,6 +52,19 @@ struct ContentView: View {
             case .failure(let error):
                 print("Error loading Pokémon: \(error.localizedDescription)")
             }
+        }
+    }
+}
+
+
+struct PokemonDetails: View {
+    let name: String
+    let height: Double
+    
+    var body: some View {
+        VStack {
+            Text(name)
+            Text("\(height)")
         }
     }
 }
