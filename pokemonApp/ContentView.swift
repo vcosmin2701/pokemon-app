@@ -42,7 +42,13 @@ struct ContentView: View {
                 if let pokemons = graphQLResult.data?.pokemon_v2_pokemon {
                     self.pokemonList = pokemons.compactMap { pokemon in
                         let sprite = pokemon.pokemon_v2_pokemonsprites.first?.sprites
-                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "")
+                        let types: [String] = pokemon.pokemon_v2_pokemontypes.map{ item in
+                            if let temp = item.pokemon_v2_type {
+                                return temp.name
+                            }
+                            return "unknown"
+                        }
+                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types)
                     }
                 }
             case .failure(let error):
@@ -58,7 +64,9 @@ struct Pokemon: Identifiable, Hashable {
     let height: Int
     let weight: Int
     let sprite: String
+    let type: [String]
 }
+
 
 
 struct PokemonDetails: View {
@@ -74,6 +82,13 @@ struct PokemonDetails: View {
             Text("Name: \(pokemon.name)")
             Text("Height: \(pokemon.height)cm")
             Text("Weight: \(pokemon.weight)kg")
+            
+            HStack{
+                Text("Types: ")
+                ForEach(pokemon.type, id: \.self) { type in
+                    Text("\(type) ")
+                }
+            }
             
         }
     }
