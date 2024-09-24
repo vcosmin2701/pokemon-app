@@ -15,21 +15,15 @@ struct ContentView: View {
         url: URL(string: "https://beta.pokeapi.co/graphql/v1beta")!
     )
     
-    @State private var pokemonNames: [String] = []
+    @State private var pokemonList: [Pokemon] = []
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                
-                List(pokemonNames, id: \.self) { name in
-                    NavigationLink(name, value: name)
-                }
-                .navigationDestination(for: String.self) { pokemonName in
-                    PokemonDetails(name: pokemonName, height: 232)
-                }
+            List(pokemonList) { pokemon in
+                NavigationLink(pokemon.name, value: pokemon.name)
+            }
+            .navigationDestination(for: String.self) { pokemonName in
+                PokemonDetails(name: pokemonName, height: 232   )
             }
             .navigationTitle("Home")
             
@@ -42,12 +36,14 @@ struct ContentView: View {
     
     private func fetchPokemon() {
         let query = PokemonGraphQLCallQuery()
-            
+        
         apolloClient.fetch(query: query) { result in
             switch result {
             case .success(let graphQLResult):
                 if let pokemons = graphQLResult.data?.pokemon_v2_pokemon {
-                    self.pokemonNames = pokemons.compactMap { $0.name }
+                    self.pokemonList = pokemons.compactMap { pokemon in
+                        Pokemon(id: pokemon.id, name: pokemon.name, height: pokemon.height ?? 0)
+                    }
                 }
             case .failure(let error):
                 print("Error loading Pokémon: \(error.localizedDescription)")
@@ -56,6 +52,11 @@ struct ContentView: View {
     }
 }
 
+struct Pokemon: Identifiable {
+    let id: Int
+    let name: String
+    let height: Int
+}
 
 struct PokemonDetails: View {
     let name: String
