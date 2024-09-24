@@ -20,10 +20,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(pokemonList) { pokemon in
-                NavigationLink(pokemon.name, value: pokemon.name)
+                NavigationLink(pokemon.name, value: pokemon)
             }
-            .navigationDestination(for: String.self) { pokemonName in
-                PokemonDetails(name: pokemonName, height: 232   )
+            .navigationDestination(for: Pokemon.self) { pokemon in
+                PokemonDetails(pokemon: pokemon)
             }
             .navigationTitle("Home")
             
@@ -52,20 +52,19 @@ struct ContentView: View {
     }
 }
 
-struct Pokemon: Identifiable {
+struct Pokemon: Identifiable, Hashable {
     let id: Int
     let name: String
     let height: Int
 }
 
 struct PokemonDetails: View {
-    let name: String
-    let height: Double
+    let pokemon: Pokemon
     
     var body: some View {
         VStack {
-            Text(name)
-            Text("\(height)")
+            Text(pokemon.name)
+            Text("\(pokemon.height)")
         }
     }
 }
