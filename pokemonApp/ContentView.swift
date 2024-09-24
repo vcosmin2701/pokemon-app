@@ -48,7 +48,16 @@ struct ContentView: View {
                             }
                             return "unknown"
                         }
-                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types)
+                        
+                        let stats: [PokemonStat] = pokemon.pokemon_v2_pokemonstats.map { item in
+                            if let temp = item.pokemon_v2_stat{
+                                return PokemonStat(name: temp.name, baseStat: item.base_stat)
+                            }
+                            return PokemonStat(name: "", baseStat: 0)
+                        }
+                        
+                        
+                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types, stats: stats)
                     }
                 }
             case .failure(let error):
@@ -65,9 +74,29 @@ struct Pokemon: Identifiable, Hashable {
     let weight: Int
     let sprite: String
     let type: [String]
+    let stats: [PokemonStat]
 }
 
+struct PokemonStat : Identifiable, Hashable{
+    let id = UUID()
+    let name: String
+    let baseStat: Int
+    
+}
 
+struct CardStat: View {
+    let stat: PokemonStat
+    
+    var body: some View {
+        HStack {
+            Text("\(stat.name)")
+            Spacer()
+            Text("\(stat.baseStat)")
+        }
+        
+        Divider()
+    }
+}
 
 struct PokemonDetails: View {
     let pokemon: Pokemon
@@ -89,6 +118,15 @@ struct PokemonDetails: View {
                     Text("\(type) ")
                 }
             }
+            
+            VStack{
+                Divider()
+                ForEach(pokemon.stats, id: \.self) { stat in
+                    CardStat(stat: stat)
+                }
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 20)
             
         }
     }
