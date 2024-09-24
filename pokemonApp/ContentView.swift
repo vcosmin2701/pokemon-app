@@ -16,6 +16,7 @@ struct ContentView: View {
     )
     
     @State private var pokemonList: [Pokemon] = []
+    @State private var searchOption: String = ""
     
     var body: some View {
         NavigationStack {
@@ -26,6 +27,7 @@ struct ContentView: View {
                 PokemonDetails(pokemon: pokemon)
             }
             .navigationTitle("Home")
+            .searchable(text: $searchOption, prompt: "Search for a pokemon")
             
         }
         .onAppear {
