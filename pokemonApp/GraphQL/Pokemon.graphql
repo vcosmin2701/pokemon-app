@@ -1,7 +1,16 @@
 query PokemonGraphQLCall {
-  pokemon_v2_pokemon {
+  pokemon_v2_pokemon(order_by: {id: asc}, limit: 20){
     id
-    name
-    height
+    name,
+    pokemon_v2_pokemonsprites {
+      sprites(path: "front_default")
+    }
+    height,
+    weight,
+    pokemon_v2_pokemontypes{
+      pokemon_v2_type {
+        name
+      }
+    }
   }
 }

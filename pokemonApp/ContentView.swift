@@ -28,7 +28,6 @@ struct ContentView: View {
             .navigationTitle("Home")
             
         }
-        .padding()
         .onAppear {
             fetchPokemon()
         }
@@ -42,7 +41,8 @@ struct ContentView: View {
             case .success(let graphQLResult):
                 if let pokemons = graphQLResult.data?.pokemon_v2_pokemon {
                     self.pokemonList = pokemons.compactMap { pokemon in
-                        Pokemon(id: pokemon.id, name: pokemon.name, height: pokemon.height ?? 0)
+                        let sprite = pokemon.pokemon_v2_pokemonsprites.first?.sprites
+                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "")
                     }
                 }
             case .failure(let error):
@@ -56,21 +56,25 @@ struct Pokemon: Identifiable, Hashable {
     let id: Int
     let name: String
     let height: Int
+    let weight: Int
+    let sprite: String
 }
+
 
 struct PokemonDetails: View {
     let pokemon: Pokemon
     
     var body: some View {
         VStack {
-            Text(pokemon.name)
-            Text("\(pokemon.height)")
+            AsyncImage(url: URL(string: pokemon.sprite), content: {image in
+                image.resizable().frame(width: 200, height: 200)
+            }, placeholder: {
+                ProgressView()
+            })
+            Text("Name: \(pokemon.name)")
+            Text("Height: \(pokemon.height)cm")
+            Text("Weight: \(pokemon.weight)kg")
+            
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
