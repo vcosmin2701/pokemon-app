@@ -17,6 +17,7 @@ struct ContentView: View {
     
     @State private var pokemonList: [Pokemon] = []
     @State private var searchOption: String = ""
+    @State private var isLoading = true
     
     var filteredPokemonList: [Pokemon] {
         if searchOption.isEmpty {
@@ -31,7 +32,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if filteredPokemonList.isEmpty{
+                if isLoading {
+                    ProgressView("Content is loading..")
+                }
+                else if filteredPokemonList.isEmpty{
                     Text("Not found")
                 }else{
                     List(filteredPokemonList) { pokemon in
@@ -86,6 +90,7 @@ struct ContentView: View {
             case .failure(let error):
                 print("Error loading Pokémon: \(error.localizedDescription)")
             }
+            self.isLoading = false
         }
     }
 }
