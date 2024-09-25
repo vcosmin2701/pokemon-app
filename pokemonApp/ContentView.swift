@@ -30,10 +30,17 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List(filteredPokemonList) { pokemon in
-                HStack {
-                    AsyncImage(url: URL(string: pokemon.sprite), scale: 3)
-                    NavigationLink(pokemon.name, value: pokemon)
+            Group {
+                if filteredPokemonList.isEmpty{
+                    Text("Not found")
+                }else{
+                    List(filteredPokemonList) { pokemon in
+                        HStack {
+                            AsyncImage(url: URL(string: pokemon.sprite), scale: 3)
+                            NavigationLink(pokemon.name, value: pokemon)
+                        }
+                        
+                    }
                 }
                 
             }
