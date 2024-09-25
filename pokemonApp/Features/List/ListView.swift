@@ -22,6 +22,7 @@ struct ListView: View {
             .navigationDestination(for: Pokemon.self) { pokemon in
                 PokemonDetailsView(pokemon: pokemon)
             }
+            .navigationBarTitleDisplayMode(.large)
             .navigationTitle("Home")
             .searchable(text: $viewModel.searchOption, prompt: "Search for a pokemon")
         }

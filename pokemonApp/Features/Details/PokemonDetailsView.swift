@@ -5,6 +5,15 @@ struct PokemonDetailsView: View {
     
     var body: some View {
         VStack {
+            HStack{
+                Spacer()
+                Button {
+                    print("Hello")
+                } label: {
+                    Image(systemName: "star")
+                }
+            }
+        
             AsyncImage(url: URL(string: pokemon.sprite), content: {image in
                 image.resizable().frame(width: 200, height: 200)
             }, placeholder: {
@@ -28,8 +37,13 @@ struct PokemonDetailsView: View {
                 }
             }
             .padding(.vertical, 4)
-            .padding(.horizontal, 20)
+            
+            
+            Spacer()
+            
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .padding(.horizontal, 20)
     }
 }
 
