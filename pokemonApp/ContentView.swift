@@ -31,7 +31,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(filteredPokemonList) { pokemon in
-                NavigationLink(pokemon.name, value: pokemon)
+                HStack {
+                    AsyncImage(url: URL(string: pokemon.sprite), scale: 3)
+                    NavigationLink(pokemon.name, value: pokemon)
+                }
+                
             }
             .navigationDestination(for: Pokemon.self) { pokemon in
                 PokemonDetails(pokemon: pokemon)
