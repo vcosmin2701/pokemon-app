@@ -18,9 +18,19 @@ struct ContentView: View {
     @State private var pokemonList: [Pokemon] = []
     @State private var searchOption: String = ""
     
+    var filteredPokemonList: [Pokemon] {
+        if searchOption.isEmpty {
+            return pokemonList
+        } else {
+            return pokemonList.filter { pokemon in
+                pokemon.name.lowercased().contains(searchOption.lowercased())
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            List(pokemonList) { pokemon in
+            List(filteredPokemonList) { pokemon in
                 NavigationLink(pokemon.name, value: pokemon)
             }
             .navigationDestination(for: Pokemon.self) { pokemon in
