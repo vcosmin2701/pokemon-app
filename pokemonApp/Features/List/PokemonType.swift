@@ -1,6 +1,6 @@
 import Foundation
 
-struct Pokemon: Identifiable, Hashable{
+struct Pokemon: Identifiable, Hashable, Codable{
     let id: Int
     let name: String
     let height: Int
@@ -8,5 +8,4 @@ struct Pokemon: Identifiable, Hashable{
     let sprite: String
     let type: [String]
     let stats: [PokemonStatType]
-    var isFavorite: Bool
 }

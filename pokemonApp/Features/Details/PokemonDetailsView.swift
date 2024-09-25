@@ -1,14 +1,7 @@
 import SwiftUI
 
 struct PokemonDetailsView: View {
-    let pokemon: Pokemon
-    
     @ObservedObject var detailsModel: DetailsViewModel
-    
-    init(pokemon: Pokemon, viewModel: PokemonViewModel) {
-        self.pokemon = pokemon
-        self.detailsModel = DetailsViewModel(pokemon: pokemon, viewModel: viewModel)
-    }
     
     var body: some View {
         VStack {
@@ -17,30 +10,35 @@ struct PokemonDetailsView: View {
                 Button {
                     detailsModel.toggleFavorite()
                 } label: {
-                    Image(systemName: detailsModel.pokemon.isFavorite ? "star.fill" : "star")
-                        .foregroundColor(detailsModel.pokemon.isFavorite ? .yellow : .gray)
+                    if detailsModel.isFavoritePokemon{
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                    }else {
+                        Image(systemName: "star")
+                            .foregroundColor(.gray)
+                    }
                 }
             }
             
-            AsyncImage(url: URL(string: pokemon.sprite), content: {image in
+            AsyncImage(url: URL(string: detailsModel.pokemon.sprite), content: {image in
                 image.resizable().frame(width: 200, height: 200)
             }, placeholder: {
                 ProgressView()
             })
-            Text("Name: \(pokemon.name)")
-            Text("Height: \(pokemon.height)cm")
-            Text("Weight: \(pokemon.weight)kg")
+            Text("Name: \(detailsModel.pokemon.name)")
+            Text("Height: \(detailsModel.pokemon.height)cm")
+            Text("Weight: \(detailsModel.pokemon.weight)kg")
             
             HStack{
                 Text("Types: ")
-                ForEach(pokemon.type, id: \.self) { type in
+                ForEach(detailsModel.pokemon.type, id: \.self) { type in
                     Text("\(type) ")
                 }
             }
             
             VStack{
                 Divider()
-                ForEach(pokemon.stats, id: \.self) { stat in
+                ForEach(detailsModel.pokemon.stats, id: \.self) { stat in
                     CardStatView(stat: stat)
                 }
             }

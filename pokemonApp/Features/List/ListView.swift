@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ListView: View {
     @StateObject private var viewModel = PokemonViewModel()
+    
 
     var body: some View {
         NavigationStack {
@@ -20,7 +21,8 @@ struct ListView: View {
                 }
             }
             .navigationDestination(for: Pokemon.self) { pokemon in
-                PokemonDetailsView(pokemon: pokemon, viewModel: viewModel)
+                let viewModel = DetailsViewModel(pokemon: pokemon)
+                PokemonDetailsView(detailsModel: viewModel)
             }
             .navigationBarTitleDisplayMode(.large)
             .navigationTitle("Home")
