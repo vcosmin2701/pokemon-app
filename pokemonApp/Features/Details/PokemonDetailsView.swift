@@ -3,17 +3,25 @@ import SwiftUI
 struct PokemonDetailsView: View {
     let pokemon: Pokemon
     
+    @ObservedObject var detailsModel: DetailsViewModel
+    
+    init(pokemon: Pokemon, viewModel: PokemonViewModel) {
+        self.pokemon = pokemon
+        self.detailsModel = DetailsViewModel(pokemon: pokemon, viewModel: viewModel)
+    }
+    
     var body: some View {
         VStack {
-            HStack{
+            HStack {
                 Spacer()
                 Button {
-                    print("Hello")
+                    detailsModel.toggleFavorite()
                 } label: {
-                    Image(systemName: "star")
+                    Image(systemName: detailsModel.pokemon.isFavorite ? "star.fill" : "star")
+                        .foregroundColor(detailsModel.pokemon.isFavorite ? .yellow : .gray)
                 }
             }
-        
+            
             AsyncImage(url: URL(string: pokemon.sprite), content: {image in
                 image.resizable().frame(width: 200, height: 200)
             }, placeholder: {

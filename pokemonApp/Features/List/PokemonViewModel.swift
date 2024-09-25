@@ -40,7 +40,7 @@ class PokemonViewModel: ObservableObject {
                             }
                             return PokemonStatType(name: "", baseStat: 0)
                         }
-                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types, stats: stats)
+                        return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types, stats: stats, isFavorite: false)
                     }
                 }
             case .failure(let error):
@@ -49,4 +49,11 @@ class PokemonViewModel: ObservableObject {
             self.isLoading = false
         }
     }
+    
+    func toggleFavorite(for pokemonToToggle: Pokemon) {
+        if let index = pokemonList.firstIndex(where: { $0.id == pokemonToToggle.id }) {
+            pokemonList[index].isFavorite.toggle()
+        }
+    }
+    
 }
