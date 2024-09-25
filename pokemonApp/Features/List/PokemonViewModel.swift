@@ -1,16 +1,26 @@
-import SwiftUI
+import Foundation
 import Apollo
 import PokeAPI
 
 class PokemonViewModel: ObservableObject {
     @Published var pokemonList: [Pokemon] = []
     @Published var isLoading: Bool = true
+    @Published var searchOption: String = ""
     
     private let apolloClient = ApolloClient(url: URL(string: "https://beta.pokeapi.co/graphql/v1beta")!)
     
+    var filteredPokemonList: [Pokemon] {
+        if searchOption.isEmpty {
+            return self.pokemonList
+        } else {
+            return pokemonList.filter { pokemon in
+                pokemon.name.lowercased().contains(searchOption.lowercased())
+            }
+        }
+    }
+    
     func fetchPokemon() {
         let query = PokemonGraphQLCallQuery()
-        
         apolloClient.fetch(query: query) { result in
             switch result {
             case .success(let graphQLResult):
@@ -30,7 +40,6 @@ class PokemonViewModel: ObservableObject {
                             }
                             return PokemonStatType(name: "", baseStat: 0)
                         }
-                        
                         return Pokemon(id: pokemon.id, name: pokemon.name.capitalized, height: pokemon.height ?? 0, weight: pokemon.height ?? 0, sprite: sprite ?? "", type: types, stats: stats)
                     }
                 }

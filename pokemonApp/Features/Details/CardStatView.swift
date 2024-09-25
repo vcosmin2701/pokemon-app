@@ -1,10 +1,3 @@
-//
-//  CardStat.swift
-//  pokemonApp
-//
-//  Created by Anonim on 25.09.2024.
-//
-
 import SwiftUI
 
 struct CardStatView: View {
@@ -16,7 +9,6 @@ struct CardStatView: View {
             Spacer()
             Text("\(stat.baseStat)")
         }
-        
         Divider()
     }
 }

@@ -1,10 +1,3 @@
-//
-//  PokemonDetailsView.swift
-//  pokemonApp
-//
-//  Created by Anonim on 25.09.2024.
-//
-
 import SwiftUI
 
 struct PokemonDetailsView: View {
@@ -36,7 +29,6 @@ struct PokemonDetailsView: View {
             }
             .padding(.vertical, 4)
             .padding(.horizontal, 20)
-            
         }
     }
 }

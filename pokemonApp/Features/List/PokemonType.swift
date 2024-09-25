@@ -1,10 +1,3 @@
-//
-//  PokemonType.swift
-//  pokemonApp
-//
-//  Created by Anonim on 25.09.2024.
-//
-
 import Foundation
 
 struct Pokemon: Identifiable, Hashable {
