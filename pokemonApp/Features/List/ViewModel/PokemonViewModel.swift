@@ -14,7 +14,7 @@ class PokemonViewModel: ObservableObject {
             return self.pokemonList
         } else {
             return pokemonList.filter { pokemon in
-                pokemon.name.lowercased().contains(searchOption.lowercased())
+                pokemon.name.lowercased().hasPrefix(searchOption.lowercased())
             }
         }
     }
