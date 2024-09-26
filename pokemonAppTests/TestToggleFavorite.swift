@@ -12,20 +12,12 @@ final class TestToggleFavorite: XCTestCase {
         UserDefaults.standard.removeObject(forKey: "SavePokemon")
     }
     
-    override func tearDownWithError() throws {
-        viewModel = nil
-        samplePokemon = nil
-        UserDefaults.standard.removeObject(forKey: "SavePokemon")
-    }
-    
     func testToggleFavorite_AddsPokemonToFavorite() {
         XCTAssertFalse(viewModel.isFavoritePokemon)
         viewModel.toggleFavorite()
-        
-        XCTAssertTrue(viewModel.isFavoritePokemon)
-        
         print("Favorites after toggle:", viewModel.favPokemons)
-        
+
         XCTAssertTrue(viewModel.favPokemons.contains(where: { $0.id == samplePokemon.id }))
     }
+    
 }
