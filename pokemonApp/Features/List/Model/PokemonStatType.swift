@@ -1,7 +1,6 @@
 import Foundation
 
-struct PokemonStatType : Identifiable, Hashable, Codable{
-    let id = UUID()
+struct PokemonStatType : Hashable, Codable{
     let name: String
     let baseStat: Int    
 }
