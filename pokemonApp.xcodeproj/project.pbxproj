@@ -102,10 +102,9 @@
 		872126A62CA3FC800043CC78 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				87A403BA2CA15806000F6BEE /* ListView.swift */,
-				872126A32CA3F8B00043CC78 /* PokemonViewModel.swift */,
-				8721269F2CA3F5FB0043CC78 /* PokemonStatType.swift */,
-				872126A12CA3F64C0043CC78 /* PokemonType.swift */,
+				879712C32CA540F600D632B2 /* View */,
+				879712C22CA540F000D632B2 /* ViewModel */,
+				879712C12CA540E700D632B2 /* Model */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -113,9 +112,9 @@
 		872126A72CA3FC8E0043CC78 /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				8721269B2CA3F5000043CC78 /* PokemonDetailsView.swift */,
-				8721269D2CA3F56F0043CC78 /* CardStatView.swift */,
-				872126A82CA403580043CC78 /* DetailsViewModel.swift */,
+				879712C02CA53F8C00D632B2 /* View */,
+				879712BF2CA53F7C00D632B2 /* ViewModel */,
+				879712BE2CA53F6000D632B2 /* Model */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -142,6 +141,55 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		879712BE2CA53F6000D632B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		879712BF2CA53F7C00D632B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				872126A82CA403580043CC78 /* DetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		879712C02CA53F8C00D632B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8721269B2CA3F5000043CC78 /* PokemonDetailsView.swift */,
+				8721269D2CA3F56F0043CC78 /* CardStatView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		879712C12CA540E700D632B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				872126A12CA3F64C0043CC78 /* PokemonType.swift */,
+				8721269F2CA3F5FB0043CC78 /* PokemonStatType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		879712C22CA540F000D632B2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				872126A32CA3F8B00043CC78 /* PokemonViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		879712C32CA540F600D632B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87A403BA2CA15806000F6BEE /* ListView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		87A403AC2CA15806000F6BEE = {

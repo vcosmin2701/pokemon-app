@@ -7,6 +7,7 @@ struct PokemonDetailsView: View {
         VStack {
             HStack {
                 Spacer()
+                
                 Button {
                     detailsModel.toggleFavorite()
                 } label: {
@@ -25,12 +26,14 @@ struct PokemonDetailsView: View {
             }, placeholder: {
                 ProgressView()
             })
+            
             Text("Name: \(detailsModel.pokemon.name)")
             Text("Height: \(detailsModel.pokemon.height)cm")
             Text("Weight: \(detailsModel.pokemon.weight)kg")
             
             HStack{
                 Text("Types: ")
+                
                 ForEach(detailsModel.pokemon.type, id: \.self) { type in
                     Text("\(type) ")
                 }
@@ -38,15 +41,14 @@ struct PokemonDetailsView: View {
             
             VStack{
                 Divider()
+                
                 ForEach(detailsModel.pokemon.stats, id: \.self) { stat in
                     CardStatView(stat: stat)
                 }
             }
             .padding(.vertical, 4)
             
-            
             Spacer()
-            
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal, 20)

@@ -3,7 +3,6 @@ import SwiftUI
 struct ListView: View {
     @StateObject private var viewModel = PokemonViewModel()
     
-
     var body: some View {
         NavigationStack {
             Group {

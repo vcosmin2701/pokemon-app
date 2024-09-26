@@ -9,6 +9,7 @@ struct CardStatView: View {
             Spacer()
             Text("\(stat.baseStat)")
         }
+        
         Divider()
     }
 }
